@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- action - nurodom puslapį į kurį forma siunčia duomenis -->
+    <form action="" id="test-form">
+        <div class="form-control">
+            <label for="person-name">Name</label>
+            <input type="text" name="name" id="person-name" placeholder="Enter your name">
+        </div>
+        <div class="form-control">
+            <label for="person-age">Age</label>
+            <input type="number" name="age" id="person-age" placeholder="Enter your age">
+        </div>
+        <fieldset>
+            <legend>Agree with terms and conditions</legend>
+            <div class="form-control">
+                <input type="radio" name="terms-agree" id="agree" value="agree">
+                <label for="agree">Agree</label>
+            </div>
+            <div class="form-control">
+                <!-- inputams turim pridėti value -->
+                <input type="radio" name="terms-agree" id="disagree" value="disagree">
+                <label for="disagree">Disagree</label>
+            </div>
+        </fieldset>
+        <!-- <button type="submit">Submit</button> -->
+        <input value="Submit" type="submit" id="submit-button">
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>

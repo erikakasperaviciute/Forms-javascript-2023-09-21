@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- // PIRMA DALIS:
+        // Sukurti kontaktų formą.
+        // 1. Kontaktų formoje turi būti šie laukeliai:
+        // 1. Tekstinis laukelis vardui (privalomas).
+        // 2. Tekstinis laukelis pavardei (privalomas).
+        // 3. Skaičiaus laukelis amžiui (privalomas).
+        // 4. Laukelis įvesti telefono numerį (neprivalomas).
+        // 5. Laukelis įvesti el. paštą (privalomas).
+        // 6. Range tipo laukelis, kuris skirtas įvertinti savo IT žinias nuo 1 iki 10. Galimas vertinimas tik sveikiems
+        skaičiams.
+        // 7. Radio tipo laukeliai, kuriuose pasirenkamas grupės numeris. Turi būti galimybė pasirinkti grupes nuo FEU 1gr. iki
+        FEU 10gr.
+        // 8. Checkbox tipo laukeliai, kuriuose galima pasirinkti dominančias programavimo kalbas (bent 4 skirtingi checkbox
+        elementai).
+        // 9. Šalia kiekvieno įvesties (input) elemento, pridėti label elementą, kuris žymi laukelio pavadinimą. -->
+</head>
+
+<body>
+    <form id="contacts-form">
+        <div class="form-control d-column">
+            <label for="person-name">Vardas</label>
+            <input type="text" name="name" id="person-name" placeholder="Jūsų vardas" required>
+        </div>
+        <div class="form-control d-column">
+            <label for="person-surname">Pavardė</label>
+            <input type="text" name="surname" id="person-surname" placeholder="Jūsų pavardė" required>
+        </div>
+        <div class="form-control d-column">
+            <label for="person-age">Amžius</label>
+            <input type="number" name="age" id="person-age" placeholder="Jūsų amžius" required>
+        </div>
+        <div class="form-control d-column">
+            <label for="person-mobile">Tel. nr.</label>
+            <input type="tel" name="mobile" id="person-mobile" placeholder="+370 ...">
+        </div>
+        <div class="form-control d-column">
+            <label for="person-email">El. paštas</label>
+            <input type="email" name="email" id="person-email" placeholder="Jūsų el. pašto adresas" required>
+        </div>
+        <div class="form-control d-column">
+            <label for="person-IT-knowledge">Kaip vertinate savo IT žinias nuo 1 iki 10?</label>
+            <input type="range" name="IT-knowledge" id="person-IT-knowledge" min="0" max="10" step="1" value="0">
+            <span>Žinių vertinimas: <output id="knowledge-value"></output></span>
+        </div>
+        <fieldset>
+            <legend>Pasirinkite grupę</legend>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu1" value="feu1">
+                <label for="feu1">FEU1</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu2" value="feu2">
+                <label for="feu2">FEU2</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu3" value="feu3">
+                <label for="feu3">FEU3</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu4" value="feu4">
+                <label for="feu4">FEU4</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu5" value="feu5">
+                <label for="feu5">FEU5</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu6" value="feu6">
+                <label for="feu6">FEU6</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu7" value="feu7">
+                <label for="feu7">FEU7</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu8" value="feu8">
+                <label for="feu8">FEU8</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu9" value="feu9">
+                <label for="feu9">FEU9</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" name="group" id="feu10" value="feu10">
+                <label for="feu10">FEU10</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Pasirinkite dominančias programavimo kalbas</legend>
+            <div class="form-control">
+                <input type="checkbox" name="language" id="python-language" value="python">
+                <label for="python-language">Python</label>
+            </div>
+            <div class="form-control">
+                <input type="checkbox" name="language" id="javascript-language" value="javascript">
+                <label for="javascript-language">Javascript</label>
+            </div>
+            <div class="form-control">
+                <input type="checkbox" name="language" id="php-language" value="php">
+                <label for="php-language">PHP</label>
+            </div>
+            <div class="form-control">
+                <input type="checkbox" name="language" id="java-language" value="java">
+                <label for="java-language">JAVA</label>
+            </div>
+        </fieldset>
+        <input value="Pateikti" type="submit" id="submit-button" class="submit-btn">
+    </form>
+    <div id="students-list"></div>
+
+
+
+    <script src="form-task.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 350px;
+}
+
+.d-column,
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.submit-btn {
+    padding: 15px 30px;
+    background-color: blue;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
