@@ -6,35 +6,72 @@
 // 4. Sukūrus studentą, turi iššokti <span> elementas, kuris informuoja apie studento sukūrimą: „Sukurtas studentas (Vardas Pavardė)". Šis span elementas dingsta po 5 sekundžių.
 // 5. Šalia range tipo laukelio, sukurti span (arba output) elementą ir jame atvaizduoti range laukelio reikšmę jam keičiantis.
 
+// TREČIA DALIS:
+// 1. Vietoje el. pašto ir tel. numerio rodyti tik žvaigždutes „****".
+// 2. Kiekviename „student-item" elemente sukurti mygtuką „Rodyti asmens duomenis".
+// 3. Paspaudus šį mygtuką:
+//     3.1. Parodyti to studento el. paštą ir tel. numerį.
+//     3.2. Pakeist mygtuko tekstą į „Slėpti asmens duomenis".
+// 4. Jeigu asmens duomenys yra rodomi, tai paspaudus mygtuką:
+//     4.1. Paslėpti asmens el. paštą ir tel. numerį.
+//     4.2. Mygtuko tekstą pakeisti į „Rodyti asmens duomenis".
+
+// KETVIRTA DALIS (studento ištrynimas):
+// 1. Prie kiekvieno sukurti studento elemento pridėti mygtuką „Ištrinti studentą".
+// 2. Paspaudus šį mygtuką, studento elementas yra ištrinamas.
+// 3. Ištrynus studentą, turi iššokti <span> elementas, kuris informuoja apie studento ištrynimą: „Studentas (Vardas Pavardė) sėkmingai ištrintas.". Šis span elementas dingsta po 5 sekundžių.
+
 function init() {
   const contactsForm = document.querySelector("#contacts-form");
   let studentsList = document.querySelector("#students-list");
 
   contactsForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(event);
+    // console.log(event);
+
+    const form = event.target;
 
     let studentItem = document.createElement("div");
     studentItem.classList.add("student-item");
 
-    const personName = contactsForm.name.value;
-    const personSurname = contactsForm.surname.value;
-    const personAge = contactsForm.age.value;
-    const personMobileNo = contactsForm.mobile.value;
-    const personEmail = contactsForm.email.value;
-    const knowledge = contactsForm.elements["IT-knowledge"].value;
-    const personGroup = contactsForm.group.value;
-    const personPreferences = contactsForm.querySelectorAll(
-      `[name="language"]:checked`
-    );
-    //console.log(personPreferences);
+    const personName = form.name.value;
+    const personSurname = form.surname.value;
+    const personAge = form.age.value;
+    const mobileNo = form.mobile.value;
+    const email = form.email.value;
+    const knowledge = form.elements["IT-knowledge"].value;
+    const personGroup = form.group.value;
+    const personPreferences = form.querySelectorAll("[name=language]:checked");
 
     const personMainInfo = document.createElement("h3");
     personMainInfo.textContent = `${personName} ${personSurname}, ${personAge} m.`;
 
-    const personContactInfo = document.createElement("p");
-    personContactInfo.textContent = `Telefono Nr.: ${personMobileNo};
-                                    El. pašto adresas: ${personEmail}`;
+    const personMobileNo = document.createElement("p");
+    personMobileNo.textContent = `Telefono Nr.: ****`;
+
+    const personEmail = document.createElement("p");
+    personEmail.textContent = `El. pašto adresas: ****`;
+
+    const toggleContactsBtn = document.createElement("button");
+    toggleContactsBtn.textContent = "Rodyti asmens duomenis";
+
+    toggleContactsBtn.addEventListener("click", () => {
+      if (
+        personMobileNo.textContent === `Telefono Nr.: ****` &&
+        personEmail.textContent === `El. pašto adresas: ****`
+      ) {
+        personMobileNo.textContent = `Telefono Nr.: ${mobileNo}`;
+        personEmail.textContent = `El. pašto adresas: ${email}`;
+        toggleContactsBtn.textContent = "Slėpti asmens duomenis";
+      } else {
+        personMobileNo.textContent = `Telefono Nr.: ****`;
+        personEmail.textContent = `El. pašto adresas: ****`;
+        toggleContactsBtn.textContent = "Rodyti asmens duomenis";
+      }
+    });
+
+    // const personContactInfo = document.createElement("p");
+    // personContactInfo.innerHTML = `Telefono Nr.: ${mobileNo} <br> El. pašto adresas: ${email}`;
 
     const personKnowledgeValue = document.createElement("p");
     personKnowledgeValue.textContent = `IT žinių vertinimas: ${knowledge}`;
@@ -54,14 +91,44 @@ function init() {
       personPreferencesList.append(personPreferencesListItem);
     });
 
+    const createdStudentElement = document.createElement("span");
+    createdStudentElement.textContent = `Sukurtas studentas (${personName} ${personSurname})`;
+    createdStudentElement.style.color = "green";
+    contactsForm.after(createdStudentElement);
+
+    setTimeout(() => {
+      createdStudentElement.textContent = "";
+    }, 5000);
+
+    const deleteStudentBtn = document.createElement("button");
+    deleteStudentBtn.textContent = "Ištrinti studentą";
+
+    deleteStudentBtn.addEventListener("click", () => {
+      studentItem.remove();
+
+      const deletedStudentElement = document.createElement("span");
+      deletedStudentElement.textContent = `Ištrintas studentas (${personName} ${personSurname})`;
+      deletedStudentElement.style.color = "red";
+      contactsForm.after(deletedStudentElement);
+
+      setTimeout(() => {
+        deletedStudentElement.textContent = "";
+      }, 5000);
+    });
+
     studentItem.append(
       personMainInfo,
-      personContactInfo,
+      personMobileNo,
+      personEmail,
       personKnowledgeValue,
       personGroupValue,
-      preferencesListTitle
+      preferencesListTitle,
+      toggleContactsBtn,
+      deleteStudentBtn
     );
     studentsList.prepend(studentItem);
+
+    form.reset();
   });
 
   getKnowledgeValue();
