@@ -46,26 +46,52 @@ function init() {
     const personMainInfo = document.createElement("h3");
     personMainInfo.textContent = `${personName} ${personSurname}, ${personAge} m.`;
 
+    // const personMobileNo = document.createElement("p");
+    // personMobileNo.textContent = `Telefono Nr.: ****`;
+
+    // const personEmail = document.createElement("p");
+    // personEmail.textContent = `El. pašto adresas: ****`;
+
+    // const toggleContactsBtn = document.createElement("button");
+    // toggleContactsBtn.textContent = "Rodyti asmens duomenis";
+
+    // toggleContactsBtn.addEventListener("click", () => {
+    //   if (
+    //     personMobileNo.textContent === `Telefono Nr.: ****` &&
+    //     personEmail.textContent === `El. pašto adresas: ****`
+    //   ) {
+    //     personMobileNo.textContent = `Telefono Nr.: ${mobileNo}`;
+    //     personEmail.textContent = `El. pašto adresas: ${email}`;
+    //     toggleContactsBtn.textContent = "Slėpti asmens duomenis";
+    //   } else {
+    //     personMobileNo.textContent = `Telefono Nr.: ****`;
+    //     personEmail.textContent = `El. pašto adresas: ****`;
+    //     toggleContactsBtn.textContent = "Rodyti asmens duomenis";
+    //   }
+    // });
+    const hiddenText = document.createElement("span");
+    hiddenText.textContent = "****";
+
     const personMobileNo = document.createElement("p");
-    personMobileNo.textContent = `Telefono Nr.: ****`;
+    personMobileNo.textContent = `Telefono Nr.: ${hiddenText.textContent}`;
 
     const personEmail = document.createElement("p");
-    personEmail.textContent = `El. pašto adresas: ****`;
+    personEmail.textContent = `El. pašto adresas: ${hiddenText.textContent}`;
 
     const toggleContactsBtn = document.createElement("button");
     toggleContactsBtn.textContent = "Rodyti asmens duomenis";
 
     toggleContactsBtn.addEventListener("click", () => {
       if (
-        personMobileNo.textContent === `Telefono Nr.: ****` &&
-        personEmail.textContent === `El. pašto adresas: ****`
+        personMobileNo.textContent.includes(hiddenText.textContent) &&
+        personEmail.textContent.includes(hiddenText.textContent)
       ) {
         personMobileNo.textContent = `Telefono Nr.: ${mobileNo}`;
         personEmail.textContent = `El. pašto adresas: ${email}`;
         toggleContactsBtn.textContent = "Slėpti asmens duomenis";
       } else {
-        personMobileNo.textContent = `Telefono Nr.: ****`;
-        personEmail.textContent = `El. pašto adresas: ****`;
+        personMobileNo.textContent = `Telefono Nr.: ${hiddenText.textContent}`;
+        personEmail.textContent = `El. pašto adresas: ${hiddenText.textContent}`;
         toggleContactsBtn.textContent = "Rodyti asmens duomenis";
       }
     });
@@ -85,35 +111,63 @@ function init() {
 
     preferencesListTitle.append(personPreferencesList);
 
-    personPreferences.forEach((preference) => {
-      const personPreferencesListItem = document.createElement("li");
-      personPreferencesListItem.textContent = preference.value;
-      personPreferencesList.append(personPreferencesListItem);
-    });
+    if (personPreferences.length > 0) {
+      personPreferences.forEach((preference) => {
+        const personPreferencesListItem = document.createElement("li");
+        personPreferencesListItem.textContent = preference.value;
+        personPreferencesList.append(personPreferencesListItem);
+      });
+    } else {
+      const noPreference = document.createElement("li");
+      noPreference.textContent = "Nepasirinkta nei viena programavimo kalba";
+      personPreferencesList.append(noPreference);
+    }
 
-    const createdStudentElement = document.createElement("span");
-    createdStudentElement.textContent = `Sukurtas studentas (${personName} ${personSurname})`;
-    createdStudentElement.style.color = "green";
-    contactsForm.after(createdStudentElement);
+    // const createdStudentElement = document.createElement("span");
+    // createdStudentElement.textContent = `Sukurtas studentas (${personName} ${personSurname})`;
+    // createdStudentElement.style.color = "green";
+    // contactsForm.after(createdStudentElement);
 
-    setTimeout(() => {
-      createdStudentElement.remove();
-    }, 5000);
+    // setTimeout(() => {
+    //   createdStudentElement.remove();
+    // }, 5000);
+
+    // const deleteStudentBtn = document.createElement("button");
+    // deleteStudentBtn.textContent = "Ištrinti studentą";
+
+    // deleteStudentBtn.addEventListener("click", () => {
+    //   studentItem.remove();
+
+    //   const deletedStudentElement = document.createElement("span");
+    //   deletedStudentElement.textContent = `Ištrintas studentas (${personName} ${personSurname})`;
+    //   deletedStudentElement.style.color = "red";
+    //   contactsForm.after(deletedStudentElement);
+
+    //   setTimeout(() => {
+    //     deletedStudentElement.remove();
+    //   }, 5000);
+    // });
+
+    function createMessage(message, textColor) {
+      const messageElement = document.createElement("span");
+      messageElement.textContent = message;
+      messageElement.style.color = textColor;
+      contactsForm.after(messageElement);
+      setTimeout(() => {
+        messageElement.remove();
+      }, 5000);
+    }
+
+    const createdStudentText = `Sukurtas studentas (${personName} ${personSurname})`;
+    createMessage(createdStudentText, "green");
 
     const deleteStudentBtn = document.createElement("button");
     deleteStudentBtn.textContent = "Ištrinti studentą";
 
     deleteStudentBtn.addEventListener("click", () => {
       studentItem.remove();
-
-      const deletedStudentElement = document.createElement("span");
-      deletedStudentElement.textContent = `Ištrintas studentas (${personName} ${personSurname})`;
-      deletedStudentElement.style.color = "red";
-      contactsForm.after(deletedStudentElement);
-
-      setTimeout(() => {
-        deletedStudentElement.remove();
-      }, 5000);
+      const deletedStudentText = `Ištrintas studentas (${personName} ${personSurname})`;
+      createMessage(deletedStudentText, "red");
     });
 
     studentItem.append(
