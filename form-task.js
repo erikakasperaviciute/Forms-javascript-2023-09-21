@@ -97,7 +97,7 @@ function init() {
     contactsForm.after(createdStudentElement);
 
     setTimeout(() => {
-      createdStudentElement.textContent = "";
+      createdStudentElement.remove();
     }, 5000);
 
     const deleteStudentBtn = document.createElement("button");
@@ -112,7 +112,7 @@ function init() {
       contactsForm.after(deletedStudentElement);
 
       setTimeout(() => {
-        deletedStudentElement.textContent = "";
+        deletedStudentElement.remove();
       }, 5000);
     });
 
